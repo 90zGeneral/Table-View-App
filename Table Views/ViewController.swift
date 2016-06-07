@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITableViewDelegate {
 //UITableViewDelegate allows the UIViewController to be responsible for the table view that was added to it in Main.storyboard
     
     
-    var cellContent = ["Mommy", "Kemi", "Dingo", "Avo"]
+    var cellContent = ["Mommy", "Kemi", "Dingo", "Avo", "Quanne", "Granny", "MacBook", "Car", "Money", "Business", "Love"]
     
     //this returns an integer that represents the number of rows in the section of the table
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,7 +30,21 @@ class ViewController: UIViewController, UITableViewDelegate {
         
         cell.textLabel?.text = cellContent[indexPath.row]    //each cell will vary based on each index value of the cellContent Array
         
+        cell.textLabel?.textColor = UIColor.redColor()       //to make the content in each row red
         return cell
+        
+    }
+    
+    //this function allows editing of the table view. In this case, we want to delete a specific row from the table view
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == .Delete {
+            
+            cellContent.removeAtIndex(indexPath.row)       //to determine which row to delete
+            
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)    //to determine the animation style when row is deleted
+            
+        }
         
     }
     
